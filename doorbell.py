@@ -33,7 +33,7 @@ def playSounds():
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(GPIO_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 # Here we just wire the  GPIO inputs to their respective callback functions
-GPIO.add_event_detect(GPIO_PIN, GPIO.RISING, callback=playSounds, bouncetime=500)
+GPIO.add_event_detect(GPIO_PIN, GPIO.RISING, callback=playSounds)
 
 while True:
     time.sleep(10)

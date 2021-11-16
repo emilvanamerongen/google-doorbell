@@ -9,7 +9,7 @@ import sys
 load_dotenv() 
 
 HOSTS = os.getenv('HOSTS', '192.168.8.220').split(',')
-SOUND_URL = os.getenv('SOUND_URL', "https://www.myinstants.com/media/sounds/roblox-death-sound_1.mp3")
+SOUND_URL = os.getenv('SOUND_URL', "https://www.myinstants.com/media/sounds/movie_1.mp3")
 GPIO_PIN = os.getenv('GPIO_PIN', 15)
 
 print('starting service')

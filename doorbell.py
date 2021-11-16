@@ -17,6 +17,7 @@ print(HOSTS)
 
 
 def playSound(host):
+    print('DONG')
     try:
         googleDevice = GoogleHome(host=host)
         googleDevice.play(SOUND_URL)
@@ -24,6 +25,7 @@ def playSound(host):
         pass
 
 def playSounds():
+    print('DING')
     for host in HOSTS:
         thread = Thread(target = playSound, args=[host])
         thread.start()

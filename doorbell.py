@@ -30,7 +30,7 @@ def playSounds():
         thread = Thread(target = playSound, args=[host])
         thread.start()
 
-
+GPIO.setmode(GPIO.BCM)
 GPIO.setup(GPIO_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 # Here we just wire the  GPIO inputs to their respective callback functions
 GPIO.add_event_detect(17, GPIO.RISING, callback=playSounds, bouncetime=500)

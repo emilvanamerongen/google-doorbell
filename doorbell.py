@@ -24,7 +24,7 @@ def playSound(host):
     except:
         pass
 
-def playSounds():
+def playSounds(args):
     print('DING')
     for host in HOSTS:
         thread = Thread(target = playSound, args=[host])

@@ -1,8 +1,8 @@
 # google-doorbell
 
-Script to play a sound on google home devices when triggering a raspberry pi GPIO pin.
+Script to play a sound on google home devices and/or send push notifications when triggering a raspberry pi GPIO pin.
 
-## how to use
+## How to use
 
 ### install requirements
 

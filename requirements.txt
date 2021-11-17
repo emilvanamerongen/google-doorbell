@@ -1,3 +1,4 @@
 googlehomepush
 python-dotenv==0.19.2
 RPi.GPIO==0.7.0
+pushnotifier==1.2.2

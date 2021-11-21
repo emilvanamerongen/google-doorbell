@@ -15,6 +15,9 @@ GPIO_PIN = os.getenv('GPIO_PIN', 15)
 # Hosts to send a sound to when triggered
 HOSTS = os.getenv('HOSTS', '').split(',')
 SOUND_URL = os.getenv('SOUND_URL', "https://www.myinstants.com/media/sounds/movie_1.mp3")
+DEVICES = os.getenv('DEVICES', None)
+if DEVICES:
+    DEVICES = DEVICES.split(',')
 
 # Login to PushNotifier for push notifications
 if os.getenv('PUSHNOTIFIER_USER', ''):
@@ -33,7 +36,7 @@ def notify(args):
     print('DING')
     # Send notifications to all users on PushNotifier account 
     if os.getenv('PUSHNOTIFIER_USER', ''):
-        NOTIFIER.send_text('ding dong')
+        NOTIFIER.send_text('ding dong', devices=DEVICES)
 
     # Send play requests to Google devices in threads
     if HOSTS:

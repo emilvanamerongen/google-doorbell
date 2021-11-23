@@ -50,7 +50,7 @@ print('Starting service..')
 # Setup listen event on GPIO
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(GPIO_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.add_event_detect(GPIO_PIN, GPIO.RISING, callback=notify)
+GPIO.add_event_detect(GPIO_PIN, GPIO.RISING, callback=notify, bouncetime=200)
 
 while True:
     time.sleep(10)

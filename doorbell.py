@@ -10,7 +10,7 @@ load_dotenv()
 ## define env variables
 
 # Raspberry Pi GPIO pin that senses for HIGH signal
-GPIO_PIN = os.getenv('GPIO_PIN', 15)
+GPIO_PIN = int(os.getenv('GPIO_PIN', 17))
 
 # Hosts to send a sound to when triggered
 HOSTS = os.getenv('HOSTS', '').split(',')
@@ -32,7 +32,7 @@ def playSound(host):
     except:
         pass
 
-def notify(args):
+def notify():
     print('DING')
     # Send notifications to all users on PushNotifier account 
     if os.getenv('PUSHNOTIFIER_USER', ''):
@@ -50,7 +50,15 @@ print('Starting service..')
 # Setup listen event on GPIO
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(GPIO_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.add_event_detect(GPIO_PIN, GPIO.RISING, callback=notify, bouncetime=200)
 
+ups = 0
 while True:
-    time.sleep(10)
+    if GPIO.input(GPIO_PIN):
+        ups+=1
+    else:
+        ups = 0
+    if ups == 10:
+        notify()
+        ups = 0
+        time.sleep(10)
+    time.sleep(0.05)

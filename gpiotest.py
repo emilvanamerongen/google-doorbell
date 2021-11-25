@@ -9,7 +9,7 @@ load_dotenv()
 GPIO_PIN = 17
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(GPIO_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(GPIO_PIN, GPIO.IN)
 
 ups = 0
 while True:

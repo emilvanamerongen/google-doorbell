@@ -9,11 +9,11 @@ load_dotenv()
 GPIO_PIN = 17
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(GPIO_PIN, GPIO.IN)
+GPIO.setup(GPIO_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 ups = 0
 while True:
-    if GPIO.input(GPIO_PIN):
+    if not GPIO.input(GPIO_PIN):
         ups+=1
     else:
         if ups > 0:
@@ -23,5 +23,6 @@ while True:
         ups = 0
         time.sleep(10)
 
-    print(ups)
+    if ups:
+        print(ups)
     time.sleep(0.05)

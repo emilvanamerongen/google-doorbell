@@ -22,6 +22,6 @@ while True:
         print('ACTIVATE')
         ups = 0
         time.sleep(10)
-    if ups > 0:
-        print(ups)
+
+    print(ups)
     time.sleep(0.05)

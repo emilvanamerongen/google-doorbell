@@ -56,7 +56,8 @@ while True:
     if GPIO.input(GPIO_PIN):
         ups+=1
     else:
-        ups = 0
+        if ups > 0:
+            ups -= 1
     if ups == 10:
         notify()
         ups = 0

@@ -6,7 +6,7 @@ import time
 load_dotenv() 
 # Setup listen event on GPIO
 # Raspberry Pi GPIO pin that senses for HIGH signal
-GPIO_PIN = int(os.getenv('GPIO_PIN', 17))
+GPIO_PIN = 17
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(GPIO_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)

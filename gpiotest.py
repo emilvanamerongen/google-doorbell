@@ -9,11 +9,11 @@ load_dotenv()
 GPIO_PIN = int(os.getenv('GPIO_PIN', 17))
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(GPIO_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(GPIO_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 ups = 0
 while True:
-    if not GPIO.input(GPIO_PIN):
+    if GPIO.input(GPIO_PIN):
         ups+=1
     else:
         if ups > 0:

@@ -5,12 +5,13 @@ import os
 from dotenv import load_dotenv
 from threading import Thread
 import RPi.GPIO as GPIO
+from datetime import datetime
 
 load_dotenv() 
 ## define env variables
 
 # Raspberry Pi GPIO pin that senses for HIGH signal
-GPIO_PIN = int(os.getenv('GPIO_PIN', 17))
+GPIO_PIN = int(os.getenv('GPIO_PIN', 7))
 
 # Hosts to send a sound to when triggered
 HOSTS = os.getenv('HOSTS', '').split(',')
@@ -45,21 +46,34 @@ def notify():
             thread.start()
 
 
+def rc_time (pin_to_circuit):
+    count = 0
+
+    #Output on the pin for
+    GPIO.setup(pin_to_circuit, GPIO.OUT)
+    GPIO.output(pin_to_circuit, GPIO.LOW)
+    time.sleep(0.1)
+
+    #Change the pin back to input
+    GPIO.setup(pin_to_circuit, GPIO.IN)
+
+    #Count until the pin goes high
+    while (GPIO.input(pin_to_circuit) == GPIO.LOW):
+        count += 1
+
+    return count
+
 print('Starting service..')
 
-# Setup listen event on GPIO
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(GPIO_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-
-ups = 0
-while True:
-    if GPIO.input(GPIO_PIN):
-        ups+=1
-    else:
-        if ups > 0:
-            ups -= 1
-    if ups == 10:
-        notify()
-        ups = 0
-        time.sleep(10)
-    time.sleep(0.05)
+#Catch when script is interrupted, cleanup correctly
+last_activation = datetime.now()
+try:
+    # Main loop
+    while True:
+        if rc_time(GPIO_PIN) < 100000 and (datetime.now() - last_activation).seconds > 60:
+            last_activation = datetime.now()
+            notify()
+except KeyboardInterrupt:
+    pass
+finally:
+    GPIO.cleanup()

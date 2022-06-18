@@ -63,6 +63,7 @@ def rc_time (pin_to_circuit):
 
     return count
 
+GPIO.setmode(GPIO.BOARD)
 print('Starting service..')
 
 #Catch when script is interrupted, cleanup correctly

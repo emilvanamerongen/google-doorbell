@@ -57,11 +57,12 @@ def rc_time (pin_to_circuit):
     #Change the pin back to input
     GPIO.setup(pin_to_circuit, GPIO.IN)
 
-    #Count until the pin goes high
-    while (GPIO.input(pin_to_circuit) == GPIO.LOW):
-        count += 1
+    start = time.time_ns()
+    GPIO.wait_for_edge(pin_to_circuit, GPIO.FALLING)
+    end = time.time_ns()
 
-    return count
+    print(end - start)
+    return end - start
 
 GPIO.setmode(GPIO.BOARD)
 print('Starting service..')

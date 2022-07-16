@@ -61,7 +61,6 @@ def rc_time (pin_to_circuit):
     GPIO.wait_for_edge(pin_to_circuit, GPIO.RISING)
     end = time.time_ns()
 
-    print(end - start)
     return end - start
 
 GPIO.setmode(GPIO.BOARD)
@@ -72,10 +71,9 @@ last_activation = datetime.now()
 try:
     # Main loop
     while True:
-        if rc_time(GPIO_PIN) < 1000000000 and (datetime.now() - last_activation).seconds > 60:
+        if rc_time(GPIO_PIN) < 10000000000 and (datetime.now() - last_activation).seconds > 60:
             last_activation = datetime.now()
-            print('dingdong')
-            # notify()
+            notify()
 except KeyboardInterrupt:
     pass
 finally:

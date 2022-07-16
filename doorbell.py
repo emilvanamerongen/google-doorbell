@@ -74,7 +74,7 @@ try:
     while True:
         if rc_time(GPIO_PIN) < 100000 and (datetime.now() - last_activation).seconds > 60:
             last_activation = datetime.now()
-            notify()
+            # notify()
 except KeyboardInterrupt:
     pass
 finally:

@@ -58,7 +58,8 @@ def rc_time (pin_to_circuit):
     GPIO.setup(pin_to_circuit, GPIO.IN)
 
     start = time.time_ns()
-    GPIO.wait_for_edge(pin_to_circuit, GPIO.FALLING)
+    print("waiting for event")
+    GPIO.wait_for_edge(pin_to_circuit, GPIO.RISING)
     end = time.time_ns()
 
     print(end - start)
